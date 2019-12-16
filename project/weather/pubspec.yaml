@@ -27,6 +27,8 @@ dependencies:
   # This library is used for linting.
   effective_dart: ^1.1.0
 
+  weather: ^0.9.5
+
 
 dev_dependencies:
   flutter_test:
