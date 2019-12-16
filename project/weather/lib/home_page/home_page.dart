@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather/controls/daily_forecast.dart';
 import 'package:weather/controls/weather_column.dart';
 import 'package:weather/controls/weather_row.dart';
 import 'package:weather/controls/weekly_forecast.dart';
@@ -72,18 +73,29 @@ class HomePageState extends State<HomePage> {
                 ),
                 Container(
                   height: 140,
-                  child: ListView.builder(
+                  child: ListView(
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        padding: EdgeInsets.all(16),
-                        child: WeatherColumn(
-                          bottomText: "32˚",
-                          icon: Icon(Icons.cloud),
-                          topText: "3PM",
-                        ),
-                      );
-                    },
+                    children: [
+                      DailyForecast(
+                        columns: [
+                          WeatherColumn(
+                            bottomText: "32˚",
+                            icon: Icon(Icons.cloud),
+                            topText: "3PM",
+                          ),
+                          WeatherColumn(
+                            bottomText: "32˚",
+                            icon: Icon(Icons.cloud),
+                            topText: "3PM",
+                          ),
+                          WeatherColumn(
+                            bottomText: "32˚",
+                            icon: Icon(Icons.cloud),
+                            topText: "3PM",
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 ),
                 Container(
@@ -123,11 +135,3 @@ class HomePageState extends State<HomePage> {
     );
   }
 }
-
-
-
-
-
-
-
-
