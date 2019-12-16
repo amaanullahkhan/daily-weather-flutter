@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather/controls/primary_text.dart';
+import 'package:weather_app/controls/primary_text.dart';
 
 class WeatherRow extends StatelessWidget {
   final String day;

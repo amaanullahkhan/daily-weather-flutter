@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:weather/controls/daily_forecast.dart';
-import 'package:weather/controls/weather_column.dart';
-import 'package:weather/controls/weather_row.dart';
-import 'package:weather/controls/weekly_forecast.dart';
-import 'package:weather/controls/primary_text.dart';
+import 'package:weather_app/controls/daily_forecast.dart';
+import 'package:weather_app/controls/weather_column.dart';
+import 'package:weather_app/controls/weather_row.dart';
+import 'package:weather_app/controls/weekly_forecast.dart';
+import 'package:weather_app/controls/primary_text.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
