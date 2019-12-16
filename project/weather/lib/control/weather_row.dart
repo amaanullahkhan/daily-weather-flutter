@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather/Controls/PrimaryText.dart';
+import 'package:weather/controls/primary_text.dart';
 
 class WeatherRow extends StatelessWidget {
   final String day;
@@ -16,7 +16,7 @@ class WeatherRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          PrimaryText(this.day),
+          PrimaryText(day),
           Expanded(
             child: SizedBox.shrink(),
           ),
@@ -24,11 +24,11 @@ class WeatherRow extends StatelessWidget {
           Expanded(
             child: SizedBox.shrink(),
           ),
-          PrimaryText(this.maxTemp),
+          PrimaryText(maxTemp),
           SizedBox(
             width: 40,
           ),
-          PrimaryText(this.minTemp),
+          PrimaryText(minTemp),
         ],
       ),
     );

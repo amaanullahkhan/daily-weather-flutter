@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:weather/Controls/PrimaryText.dart';
-import 'package:weather/Controls/WeatherColumn.dart';
-import 'package:weather/Controls/WeatherRow.dart';
-import 'package:weather/Controls/WeeklyForecast.dart';
+import 'package:weather/controls/weather_column.dart';
+import 'package:weather/controls/weather_row.dart';
+import 'package:weather/controls/weekly_forecast.dart';
+import 'package:weather/controls/primary_text.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);

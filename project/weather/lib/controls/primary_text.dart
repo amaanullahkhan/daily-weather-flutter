@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class PrimaryText extends StatelessWidget {
@@ -11,8 +10,8 @@ class PrimaryText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      this.text,
-      style: TextStyle(color: this.color, fontSize: this.fontSize),
+      text,
+      style: TextStyle(color: color, fontSize: fontSize),
     );
   }
 }

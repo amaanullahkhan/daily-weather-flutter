@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'PrimaryText.dart';
+import 'primary_text.dart';
 
 class WeatherColumn extends StatelessWidget {
   final String topText;
@@ -13,12 +13,12 @@ class WeatherColumn extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        PrimaryText(this.topText),
+        PrimaryText(topText),
         IconTheme(
           data: IconThemeData(color: Colors.white),
           child: icon,
         ),
-        PrimaryText(this.bottomText),
+        PrimaryText(bottomText),
       ],
     );
   }
