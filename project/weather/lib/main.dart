@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:weather/weather.dart';
-import 'package:weather_app/constants/string_constants.dart';
-import 'home_page/home_page.dart';
+import 'package:weather_app/app_dependency_container.dart';
+import 'home_page/forecast_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  var weatherStation = WeatherStation(StringConstants.standard.openWeatherApiKey);
-  var weather = await weatherStation.currentWeather();
-  print(weather.toString());
-  runApp(MyApp());
+  runApp(WeatherApp(weatherAppFactory: AppDependencyContainer()));
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class WeatherApp extends StatelessWidget {
+  final WeatherAppFactory weatherAppFactory;
+
+  WeatherApp({@required this.weatherAppFactory});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePage(),
-    );
+    return MaterialApp(home: weatherAppFactory.makeForecastView());
   }
+}
+
+abstract class WeatherAppFactory {
+  ForecastView makeForecastView();
 }

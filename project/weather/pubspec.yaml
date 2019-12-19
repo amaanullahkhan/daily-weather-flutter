@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -25,9 +25,16 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   # This library is used for linting.
+  # https://github.com/tenhobi/effective_dart
   effective_dart: ^1.1.0
 
+  # OpenWeather API Library
+  # https://pub.dev/packages/weather
   weather: ^0.9.5
+
+  # Network Library
+  # https://pub.dev/packages/dio#-installing-tab-
+  dio: ^3.0.7
 
 
 dev_dependencies:

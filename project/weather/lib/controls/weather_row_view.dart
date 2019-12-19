@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/controls/primary_text.dart';
 
-class WeatherRow extends StatelessWidget {
-  final String day;
-  final String maxTemp;
-  final String minTemp;
-  final Icon icon;
 
-  WeatherRow({this.day, this.maxTemp, this.minTemp, this.icon});
+abstract class WeatherRow {
+  String get day;
+  String get icon;
+  String get maxTemp;
+  String get minTemp;
+}
+
+
+class WeatherRowView extends StatelessWidget {
+  
+  final WeatherRow row;
+
+  WeatherRowView(this.row);
 
   @override
   Widget build(BuildContext context) {
@@ -16,19 +23,19 @@ class WeatherRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          PrimaryText(day),
+          PrimaryText(row.day),
           Expanded(
             child: SizedBox.shrink(),
           ),
-          icon,
+          PrimaryText(row.icon),
           Expanded(
             child: SizedBox.shrink(),
           ),
-          PrimaryText(maxTemp),
+          PrimaryText(row.maxTemp),
           SizedBox(
             width: 40,
           ),
-          PrimaryText(minTemp),
+          PrimaryText(row.maxTemp),
         ],
       ),
     );
