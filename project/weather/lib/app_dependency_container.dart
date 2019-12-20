@@ -1,7 +1,7 @@
-import 'package:weather_app/home_page/forecast_view.dart';
-import 'package:weather_app/home_page/forecast_view_model.dart';
-import 'package:weather_app/home_page/weather_forecast_view_model.dart';
 import 'package:weather_app/main.dart';
+import 'modules/forecast/forecast_view/forecast_view.dart';
+import 'modules/forecast/forecast_view/forecast_view_model.dart';
+import 'modules/forecast/forecast_view_model/weather_forecast_view_model.dart';
 
 class AppDependencyContainer implements WeatherAppFactory {
   @override

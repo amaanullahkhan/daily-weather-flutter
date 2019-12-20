@@ -3,7 +3,7 @@ import 'package:weather_app/controls/weather_column_view.dart';
 import 'package:weather_app/controls/weather_row_view.dart';
 import 'package:weather_app/controls/weather_textual_row.dart';
 import 'package:weather_app/controls/weekly_forecast_view.dart';
-import 'forecast_view_model.dart';
+import 'package:weather_app/modules/forecast/forecast_view/forecast_view_model.dart';
 
 class WeatherForecastViewModel implements ForecastViewModel {
   InfoViewModel infoViewModel;

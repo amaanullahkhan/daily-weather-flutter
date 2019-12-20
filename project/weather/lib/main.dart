@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/app_dependency_container.dart';
-import 'home_page/forecast_view.dart';
+import 'modules/forecast/forecast_view/forecast_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

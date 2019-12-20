@@ -3,7 +3,8 @@ import 'package:weather_app/controls/daily_forecast_view.dart';
 import 'package:weather_app/controls/primary_text.dart';
 import 'package:weather_app/controls/weather_textual_row.dart';
 import 'package:weather_app/controls/weekly_forecast_view.dart';
-import 'package:weather_app/home_page/forecast_view_model.dart';
+
+import 'forecast_view_model.dart';
 
 class ForecastView extends StatelessWidget {
   final ForecastViewModel viewModel;
