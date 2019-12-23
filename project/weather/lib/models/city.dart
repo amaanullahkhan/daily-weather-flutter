@@ -1,3 +1,5 @@
+import 'coordinate.dart';
+
 class City {
   int id;
   String name;
@@ -12,16 +14,5 @@ class City {
         name: json['name'],
         country: json['country'],
         coordinate: json['coordinate']);
-  }
-}
-
-class Coordinate {
-  double latitude;
-  double longitude;
-
-  Coordinate({this.latitude, this.longitude});
-
-  factory Coordinate.fromJson(Map<String, dynamic> json) {
-    return Coordinate(latitude: json['latitude'], longitude: json['longitude']);
   }
 }
