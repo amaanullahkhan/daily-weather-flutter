@@ -6,9 +6,6 @@ import 'modules/forecasts/forecasts_view/forecasts_view.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(WeatherApp(weatherAppFactory: AppDependencyContainer()));
-  var service = ForecastsService();
-  var weather  = await service.forecastOf('1172451');
-  print(weather);
 }
 
 class WeatherApp extends StatelessWidget {
