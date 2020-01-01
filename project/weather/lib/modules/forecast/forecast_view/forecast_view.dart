@@ -14,7 +14,7 @@ class ForecastView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[300],
+      backgroundColor: Colors.transparent,
       body: Container(
         child: ListView(
           children: <Widget>[

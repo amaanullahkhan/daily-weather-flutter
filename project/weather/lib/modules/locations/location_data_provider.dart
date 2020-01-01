@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -10,10 +9,10 @@ class LocationsDataProvider {
     var cityString = await rootBundle.loadString("lib/assets/city.json");
     return compute(_parseCities, cityString);
   }
- 
 }
 
- List<City> _parseCities(String string) {
-    final parsed = json.decode(string).cast<Map<String, dynamic>>();
-    return parsed.map<City>((json) => City.fromJson(json)).toList();
-  }
+// only global functions can be passed to compute(#,#), thats why declaring this on global level.
+List<City> _parseCities(String string) {
+  final parsed = json.decode(string).cast<Map<String, dynamic>>();
+  return parsed.map<City>((json) => City.fromJson(json)).toList();
+}
