@@ -1,15 +1,18 @@
 import 'package:weather_app/main.dart';
 import 'package:weather_app/modules/forecasts/forecasts_view/forecasts_view.dart';
 import 'package:weather_app/modules/forecasts/forecasts_view_model/weather_forecast_view_model.dart';
+import 'package:weather_app/modules/locations/location_data_provider.dart';
+import 'package:weather_app/modules/locations/location_view/location_view.dart';
+import 'package:weather_app/modules/locations/location_view_model/location_view_model.dart';
 import 'modules/forecast/forecast_view/forecast_view.dart';
 import 'modules/forecast/forecast_view/forecast_view_model.dart';
 import 'modules/forecast/forecast_view_model/weather_forecast_view_model.dart';
 import 'modules/forecasts/forecasts_view/forecasts_view_model.dart';
 
-class AppDependencyContainer implements WeatherAppFactory {
+class AppDependencyContainer implements WeatherAppFactory, ForecastsViewFactory {
   @override
   ForecastsView makeForecastsView() {
-    return ForecastsView(viewModel: makeForecastsViewModel());
+    return ForecastsView(viewModel: makeForecastsViewModel(), forecastsViewFactory: this);
   }
 
   ForecastView makeForecastView() {
@@ -43,5 +46,12 @@ class AppDependencyContainer implements WeatherAppFactory {
       makeForecastViewModel()
     ]);
     return viewModel;
+  }
+
+  @override
+  LocationView makeLocationView() {
+    var dataProvider = LocationsDataProvider();
+    var viewModel = LocationViewModel(dataProvider);
+    return LocationView(viewModel);
   }
 }

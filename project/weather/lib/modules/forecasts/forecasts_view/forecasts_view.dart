@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/modules/forecast/forecast_view/forecast_view.dart';
 import 'package:weather_app/modules/forecasts/forecasts_view/forecasts_view_model.dart';
+import 'package:weather_app/modules/locations/location_view/location_view.dart';
 
 class ForecastsView extends StatefulWidget {
   final ForecastsViewModel viewModel;
+  final ForecastsViewFactory forecastsViewFactory;
 
-  ForecastsView({this.viewModel});
+  ForecastsView({this.viewModel, this.forecastsViewFactory});
 
   @override
-  _ForecastsViewState createState() =>
-      _ForecastsViewState(viewModel: viewModel);
+  _ForecastsViewState createState() => _ForecastsViewState(
+      viewModel: viewModel, forecastsViewFactory: forecastsViewFactory);
 }
 
 class _ForecastsViewState extends State<ForecastsView> {
   final ForecastsViewModel viewModel;
+  final ForecastsViewFactory forecastsViewFactory;
+
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  _ForecastsViewState({this.viewModel});
+  _ForecastsViewState({this.viewModel, this.forecastsViewFactory});
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +45,31 @@ class _ForecastsViewState extends State<ForecastsView> {
           Container(
             height: 70,
             child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                for (int i = 0; i < viewModel.forecasts.length; i++)
-                  circleBar(isActive: i == _currentPage)
+                Expanded(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      for (int i = 0; i < viewModel.forecasts.length; i++)
+                        circleBar(isActive: i == _currentPage)
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(8),
+                  child: FlatButton(
+                    child: Text('Add'),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  forecastsViewFactory.makeLocationView(),
+                              fullscreenDialog: true));
+                    },
+                  ),
+                )
               ],
             ),
           )
@@ -65,7 +89,8 @@ class _ForecastsViewState extends State<ForecastsView> {
           borderRadius: BorderRadius.all(Radius.circular(12))),
     );
   }
+}
 
-  
-
+abstract class ForecastsViewFactory {
+  LocationView makeLocationView();
 }
