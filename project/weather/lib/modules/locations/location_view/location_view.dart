@@ -40,18 +40,23 @@ class _LocationViewState extends State<LocationView> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> children = [];
-    children.add(TextField(controller: _searchFieldController));
-    children.addAll(viewModel.getCities().map((city) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text("${city.name}, ${city.country}"),
-      );
-    }).toList());
-
+    var cities = viewModel.getCities();
     return Scaffold(
-      body: ListView(
-        children: children,
+      body: ListView.builder(
+        itemCount: cities.length,
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return TextField(controller: _searchFieldController);
+          }
+          index = index - 1;
+          var city = cities[index];
+          return ListTile(
+            title: Text("${city.name}, ${city.country}"),
+            onTap: () {
+              viewModel.didSelectCity(index);
+            },
+          );
+        },
       ),
     );
   }

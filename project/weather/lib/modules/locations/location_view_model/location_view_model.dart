@@ -27,7 +27,7 @@ class LocationViewModel {
   }
 
   void didSelectCity(int forIndex) {
-    print(_filteredCities[forIndex]);
+    print(_filteredCities[forIndex].name);
   }
 
   void didEnterSearch(String text) {
