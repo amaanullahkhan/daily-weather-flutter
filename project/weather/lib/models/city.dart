@@ -15,4 +15,8 @@ class City {
         country: json['country'],
         coordinate: json['coordinate']);
   }
+
+  Map<String, dynamic> toMap() {
+    return {'id': id, 'name': name, 'country': country};
+  }
 }

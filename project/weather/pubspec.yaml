@@ -36,6 +36,15 @@ dependencies:
   # https://pub.dev/packages/dio#-installing-tab-
   dio: ^3.0.7
 
+  # SQLITE Database Library
+  # The sqflite package provides classes and functions to interact with a SQLite database.
+  sqflite:
+
+  # The path package provides functions to define the location for storing the database on disk.
+  path:
+
+
+
 
 dev_dependencies:
   flutter_test:
