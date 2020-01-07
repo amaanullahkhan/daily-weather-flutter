@@ -1,4 +1,5 @@
 import 'package:weather_app/main.dart';
+import 'package:weather_app/modules/forecasts/forecasts_service/forecasts_service.dart';
 import 'package:weather_app/modules/forecasts/forecasts_view/forecasts_view.dart';
 import 'package:weather_app/modules/forecasts/forecasts_view_model/weather_forecast_view_model.dart';
 import 'package:weather_app/modules/locations/location_data_provider.dart';
@@ -42,20 +43,17 @@ class AppDependencyContainer implements WeatherAppFactory, ForecastsViewFactory 
   }
 
   ForecastsViewModel makeForecastsViewModel() {
-    var viewModel = WeatherForecastsViewModel(forecasts: [
-      makeForecastViewModel(),
-      makeForecastViewModel(),
-      makeForecastViewModel()
-    ]);
+    var dbManager = DatabaseManager.shared;
+    var repository = LocationRepository(dbManager);
+    var service = ForecastsService();
+    var viewModel = WeatherForecastsViewModel(service, repository);
     return viewModel;
   }
 
   @override
-  LocationView makeLocationView() {
-    var dbManager = DatabaseManager.shared;
-    var respository = LocationRepository(dbManager);
+  LocationView makeLocationView(LocationViewModelProtocol delegate) {
     var dataProvider = LocationsDataProvider();
-    var viewModel = LocationViewModel(dataProvider, respository);
+    var viewModel = LocationViewModel(dataProvider, delegate);
     return LocationView(viewModel);
   }
 }

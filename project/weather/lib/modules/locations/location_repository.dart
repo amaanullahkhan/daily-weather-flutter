@@ -22,4 +22,10 @@ class LocationRepository {
     });
     return cities;
   }
+
+  Future<void> deleteCity(City city) async {
+    var database = manager.database;
+    var success = await database.delete('cities', where: "id = ?", whereArgs: [city.id]);
+    print(success);
+  }
 }

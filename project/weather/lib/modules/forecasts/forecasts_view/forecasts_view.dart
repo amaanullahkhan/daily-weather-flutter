@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/modules/forecast/forecast_view/forecast_view.dart';
 import 'package:weather_app/modules/forecasts/forecasts_view/forecasts_view_model.dart';
 import 'package:weather_app/modules/locations/location_view/location_view.dart';
+import 'package:weather_app/modules/locations/location_view_model/location_view_model.dart';
 
 class ForecastsView extends StatefulWidget {
   final ForecastsViewModel viewModel;
@@ -22,6 +23,23 @@ class _ForecastsViewState extends State<ForecastsView> {
   int _currentPage = 0;
 
   _ForecastsViewState({this.viewModel, this.forecastsViewFactory});
+
+  @override
+  void initState() {
+    viewModel.fetchData();
+
+    viewModel.reloadData = () {
+      setState(() {});
+    };
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    viewModel.reloadData = null;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +82,8 @@ class _ForecastsViewState extends State<ForecastsView> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  forecastsViewFactory.makeLocationView(),
+                              builder: (context) => forecastsViewFactory
+                                  .makeLocationView(viewModel),
                               fullscreenDialog: true));
                     },
                   ),
@@ -92,5 +110,5 @@ class _ForecastsViewState extends State<ForecastsView> {
 }
 
 abstract class ForecastsViewFactory {
-  LocationView makeLocationView();
+  LocationView makeLocationView(LocationViewModelProtocol delegate);
 }

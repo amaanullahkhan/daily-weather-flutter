@@ -25,6 +25,10 @@ class _LocationViewState extends State<LocationView> {
       setState(() {});
     };
 
+    viewModel.dismiss = () {
+      Navigator.of(context).pop();
+    };
+
     _searchFieldController.addListener(() {
       viewModel.didEnterSearch(_searchFieldController.text);
     });
@@ -35,6 +39,7 @@ class _LocationViewState extends State<LocationView> {
   @override
   void dispose() {
     viewModel.reloadData = null;
+    viewModel.dismiss = null;
     super.dispose();
   }
 

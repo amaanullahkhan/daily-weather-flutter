@@ -6,9 +6,9 @@ class ForecastsService {
 
   Future<List<List<Weather>>> forecastsOf(List<String> cities) async {
     var responses = await Future.wait([dio.get(
-          'https://api.openweathermap.org/data/2.5/forecast?id=${cities[0]}&appid=ae0027368366977769d812a219b6e19e'),
+          'https://api.openweathermap.org/data/2.5/forecast?id=1174872&appid=ae0027368366977769d812a219b6e19e'),
           dio.get(
-          'https://api.openweathermap.org/data/2.5/forecast?id=${cities[1]}&appid=ae0027368366977769d812a219b6e19e')]);
+          'https://api.openweathermap.org/data/2.5/forecast?id=1172451&appid=ae0027368366977769d812a219b6e19e')]);
     List<List<Weather>> forecasts = [];
     responses.map((response) {
       if (response.statusCode == 200) {

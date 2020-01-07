@@ -1,10 +1,9 @@
 import 'package:weather_app/models/city.dart';
 import 'package:weather_app/modules/locations/location_data_provider.dart';
-import 'package:weather_app/modules/locations/location_repository.dart';
 
 class LocationViewModel {
   final LocationsDataProvider _dataProvider;
-  final LocationRepository _repository;
+  final LocationViewModelProtocol delegate;
 
   List<City> _cities = [];
   List<City> _filteredCities = [];
@@ -12,8 +11,9 @@ class LocationViewModel {
   String _searchText;
 
   Function() reloadData;
+  Function() dismiss;
 
-  LocationViewModel(this._dataProvider, this._repository);
+  LocationViewModel(this._dataProvider, this.delegate);
 
   void viewInitState() async {
     _cities = await _dataProvider.getAllCities();
@@ -28,14 +28,24 @@ class LocationViewModel {
     return _filteredCities;
   }
 
-  void didSelectCity(int forIndex) {
-    _repository.insertCity(_filteredCities[forIndex]);
+  Future<void> didSelectCity(int forIndex) async {
+
+    if (delegate != null) {
+      delegate.locationViewModel(this, _filteredCities[forIndex]);
+    }
+
+    if (dismiss != null) {
+      dismiss();
+    }
   }
 
   void didEnterSearch(String text) {
     _searchText = text;
     _filteredCities = _filter(_cities, _searchText);
-    reloadData();
+
+    if (reloadData != null) {
+      reloadData();
+    }
   }
 
   List<City> _filter(List<City> cities, String forText) {
@@ -48,4 +58,8 @@ class LocationViewModel {
           .contains(forText.toLowerCase());
     }).toList();
   }
+}
+
+abstract class LocationViewModelProtocol {
+  Future<void> locationViewModel(LocationViewModel viewModel, City selectedCity);
 }
