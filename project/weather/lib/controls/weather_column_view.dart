@@ -18,7 +18,7 @@ class WeatherColumnView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         PrimaryText(column.topText),
-        PrimaryText(column.icon),
+        Image.network(column.icon),
         PrimaryText(column.bottomText),
       ],
     );

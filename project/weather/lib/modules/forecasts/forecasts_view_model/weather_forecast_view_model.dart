@@ -36,40 +36,43 @@ class WeatherForecastsViewModel implements ForecastsViewModel {
       return "${city.id}";
     }).toList());
 
-    forecasts = weathers.map((weatherList) {
+    forecasts = [];
+    for (var index = 0; index < cities.length; index++) {
+      var weatherList = weathers[index];
+      var city = cities[index];
       var weather = weatherList.first;
       var day = DateFormat('EEEE').format(weather.date);
       var infoViewModel = WeatherInfoViewModel(
-          title: weather.areaName,
+          title: "${city.name}, ${city.country}",
           subTitle: weather.weatherMain,
-          heading: "${weather.temperature.celsius}");
+          heading: "${weather.temperature.celsius.toInt()}");
       var currentTemp = WeatherTextualRowImp(
           day: day,
-          maxTemp: "${weather.tempMax.celsius}",
-          minTemp: "${weather.tempMin.celsius}",
+          maxTemp: "${weather.tempMax.celsius.toInt()}",
+          minTemp: "${weather.tempMin.celsius.toInt()}",
           text: "TODAY");
       var dailyForecastViewModel = DailyForecastViewModelImp(
           columns: weatherList.map((weather) {
         return WeatherColumnImp(
-            bottomText: "${weather.tempMin.celsius}",
-            topText: "${weather.tempMax.celsius}",
-            icon: "${weather.weatherIcon}");
+            bottomText: "${weather.tempMin.celsius.toInt()}",
+            topText: "${weather.tempMax.celsius.toInt()}",
+            icon: "http://openweathermap.org/img/wn/${weather.weatherIcon}.png");
       }).toList());
       var weeklyForecastViewModel = WeeklyForecastViewModelImp(
           rows: weatherList.map((weather) {
         var day = DateFormat('EEEE').format(weather.date);
         return WeatherRowImp(
             day: day,
-            maxTemp: "${weather.tempMax.celsius}",
-            minTemp: "${weather.tempMin.celsius}",
-            icon: "${weather.weatherIcon}");
+            maxTemp: "${weather.tempMax.celsius.toInt()}",
+            minTemp: "${weather.tempMin.celsius.toInt()}",
+            icon: "http://openweathermap.org/img/wn/${weather.weatherIcon}.png");
       }).toList());
-      return WeatherForecastViewModel(
+      forecasts.add(WeatherForecastViewModel(
           infoViewModel: infoViewModel,
           currentTemp: currentTemp,
           dailyForecastViewModel: dailyForecastViewModel,
-          weeklyForecastViewModel: weeklyForecastViewModel);
-    }).toList();
+          weeklyForecastViewModel: weeklyForecastViewModel));
+    }
 
     if (reloadData != null) {
       reloadData();

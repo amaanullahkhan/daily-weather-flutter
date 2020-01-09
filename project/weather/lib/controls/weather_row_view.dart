@@ -27,7 +27,7 @@ class WeatherRowView extends StatelessWidget {
           Expanded(
             child: SizedBox.shrink(),
           ),
-          PrimaryText(row.icon),
+          Image.network(row.icon),
           Expanded(
             child: SizedBox.shrink(),
           ),
@@ -35,7 +35,7 @@ class WeatherRowView extends StatelessWidget {
           SizedBox(
             width: 40,
           ),
-          PrimaryText(row.maxTemp),
+          PrimaryText(row.minTemp),
         ],
       ),
     );
