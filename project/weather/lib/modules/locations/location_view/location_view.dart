@@ -47,21 +47,25 @@ class _LocationViewState extends State<LocationView> {
   Widget build(BuildContext context) {
     var cities = viewModel.getCities();
     return Scaffold(
-      body: ListView.builder(
-        itemCount: cities.length,
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return TextField(controller: _searchFieldController);
-          }
-          index = index - 1;
-          var city = cities[index];
-          return ListTile(
-            title: Text("${city.name}, ${city.country}"),
-            onTap: () {
-              viewModel.didSelectCity(index);
-            },
-          );
-        },
+      appBar: AppBar(backgroundColor: Colors.lightBlue[300], title: Text(viewModel.title)),
+      body: Container(
+        padding: EdgeInsets.all(8),
+        child: ListView.builder(
+          itemCount: cities.length,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return TextField(controller: _searchFieldController);
+            }
+            index = index - 1;
+            var city = cities[index];
+            return ListTile(
+              title: Text("${city.name}, ${city.country}"),
+              onTap: () {
+                viewModel.didSelectCity(index);
+              },
+            );
+          },
+        ),
       ),
     );
   }

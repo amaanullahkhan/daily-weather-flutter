@@ -5,6 +5,8 @@ class LocationViewModel {
   final LocationsDataProvider _dataProvider;
   final LocationViewModelProtocol delegate;
 
+  String title;
+
   List<City> _cities = [];
   List<City> _filteredCities = [];
 
@@ -13,7 +15,7 @@ class LocationViewModel {
   Function() reloadData;
   Function() dismiss;
 
-  LocationViewModel(this._dataProvider, this.delegate);
+  LocationViewModel(this._dataProvider, this.delegate, this.title);
 
   void viewInitState() async {
     _cities = await _dataProvider.getAllCities();

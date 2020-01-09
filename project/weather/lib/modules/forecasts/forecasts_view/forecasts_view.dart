@@ -47,6 +47,9 @@ class _ForecastsViewState extends State<ForecastsView> {
       return ForecastView(viewModel: forecast);
     }).toList();
     return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.lightBlue[300], actions: [
+        IconButton(icon: Icon(Icons.add), onPressed: goToAddLocation)
+      ]),
       backgroundColor: Colors.lightBlue[300],
       body: Column(
         children: <Widget>[
@@ -74,20 +77,6 @@ class _ForecastsViewState extends State<ForecastsView> {
                     ],
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  child: FlatButton(
-                    child: Text('Add'),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => forecastsViewFactory
-                                  .makeLocationView(viewModel),
-                              fullscreenDialog: true));
-                    },
-                  ),
-                )
               ],
             ),
           )
@@ -106,6 +95,15 @@ class _ForecastsViewState extends State<ForecastsView> {
           color: isActive ? Colors.white : Colors.grey.shade300,
           borderRadius: BorderRadius.all(Radius.circular(12))),
     );
+  }
+
+  void goToAddLocation() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                forecastsViewFactory.makeLocationView(viewModel),
+            fullscreenDialog: true));
   }
 }
 

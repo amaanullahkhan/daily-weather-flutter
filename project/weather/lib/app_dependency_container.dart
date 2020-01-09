@@ -53,7 +53,7 @@ class AppDependencyContainer implements WeatherAppFactory, ForecastsViewFactory 
   @override
   LocationView makeLocationView(LocationViewModelProtocol delegate) {
     var dataProvider = LocationsDataProvider();
-    var viewModel = LocationViewModel(dataProvider, delegate);
+    var viewModel = LocationViewModel(dataProvider, delegate, "Select Location");
     return LocationView(viewModel);
   }
 }
