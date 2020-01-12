@@ -71,7 +71,11 @@ class WeatherForecastsViewModel implements ForecastsViewModel {
           infoViewModel: infoViewModel,
           currentTemp: currentTemp,
           dailyForecastViewModel: dailyForecastViewModel,
-          weeklyForecastViewModel: weeklyForecastViewModel));
+          weeklyForecastViewModel: weeklyForecastViewModel, onRemoveTapped: () async {
+            var city = cities[index];
+            await locationRepository.deleteCity(city);
+            fetchData();
+          }));
     }
 
     if (reloadData != null) {

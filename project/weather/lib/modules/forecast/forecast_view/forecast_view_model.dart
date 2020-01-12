@@ -7,6 +7,8 @@ abstract class ForecastViewModel {
   WeatherTextualRow currentTemp;
   DailyForecastViewModel dailyForecastViewModel;
   WeeklyForecastViewModel weeklyForecastViewModel;
+  
+  void removeTapped();
 }
 
 abstract class InfoViewModel {

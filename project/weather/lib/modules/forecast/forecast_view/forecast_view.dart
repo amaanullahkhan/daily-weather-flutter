@@ -57,8 +57,21 @@ class ForecastView extends StatelessWidget {
   Widget get infoHeader {
     return Column(
       children: <Widget>[
-        SizedBox(
-          height: 100,
+        Stack(
+          children: <Widget>[
+            SizedBox(
+              height: 100,
+            ),
+            Align(
+                child: IconButton(
+                  icon: Icon(
+                    Icons.remove,
+                    color: Colors.white,
+                  ),
+                  onPressed: viewModel.removeTapped,
+                ),
+                alignment: Alignment.centerRight)
+          ],
         ),
         PrimaryText(
           viewModel.infoViewModel.title,

@@ -11,11 +11,21 @@ class WeatherForecastViewModel implements ForecastViewModel {
   DailyForecastViewModel dailyForecastViewModel;
   WeeklyForecastViewModel weeklyForecastViewModel;
 
+  Function() onRemoveTapped;
+
   WeatherForecastViewModel(
       {this.infoViewModel,
       this.currentTemp,
       this.dailyForecastViewModel,
-      this.weeklyForecastViewModel});
+      this.weeklyForecastViewModel,
+      this.onRemoveTapped});
+
+  @override
+  void removeTapped() {
+    if (onRemoveTapped != null) {
+      onRemoveTapped();
+    }
+  }
 }
 
 class WeatherInfoViewModel implements InfoViewModel {
