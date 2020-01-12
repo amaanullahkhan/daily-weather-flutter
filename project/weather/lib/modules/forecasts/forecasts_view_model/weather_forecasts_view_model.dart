@@ -56,7 +56,8 @@ class WeatherForecastsViewModel implements ForecastsViewModel {
         return WeatherColumnImp(
             bottomText: "${weather.tempMin.celsius.toInt()}",
             topText: "${weather.tempMax.celsius.toInt()}",
-            icon: "http://openweathermap.org/img/wn/${weather.weatherIcon}.png");
+            icon:
+                "http://openweathermap.org/img/wn/${weather.weatherIcon}.png");
       }).toList());
       var weeklyForecastViewModel = WeeklyForecastViewModelImp(
           rows: weatherList.map((weather) {
@@ -65,13 +66,15 @@ class WeatherForecastsViewModel implements ForecastsViewModel {
             day: day,
             maxTemp: "${weather.tempMax.celsius.toInt()}",
             minTemp: "${weather.tempMin.celsius.toInt()}",
-            icon: "http://openweathermap.org/img/wn/${weather.weatherIcon}.png");
+            icon:
+                "http://openweathermap.org/img/wn/${weather.weatherIcon}.png");
       }).toList());
       forecasts.add(WeatherForecastViewModel(
           infoViewModel: infoViewModel,
           currentTemp: currentTemp,
           dailyForecastViewModel: dailyForecastViewModel,
-          weeklyForecastViewModel: weeklyForecastViewModel, onRemoveTapped: () async {
+          weeklyForecastViewModel: weeklyForecastViewModel,
+          onRemoveTapped: () async {
             var city = cities[index];
             await locationRepository.deleteCity(city);
             fetchData();

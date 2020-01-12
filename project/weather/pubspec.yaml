@@ -46,6 +46,8 @@ dependencies:
   # This library provides internationalization and localization. This includes message formatting and replacement, date and number formatting and parsing, and utilities for working with Bidirectional text.
   intl:
 
+  google_maps_flutter:
+
 
 
 

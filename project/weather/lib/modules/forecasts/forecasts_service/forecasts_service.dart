@@ -16,7 +16,7 @@ class ForecastsService {
       if (response.statusCode == 200) {
         Map<String, dynamic> jsonForecasts = response.data;
         List<dynamic> forecastsJson = jsonForecasts['list'];
-        forecasts.add(forecastsJson.map((weatherJson){
+        forecasts.add(forecastsJson.map((weatherJson) {
           var weather = Weather(weatherJson);
           return weather;
         }).toList());
@@ -25,5 +25,16 @@ class ForecastsService {
       }
     }
     return forecasts;
+  }
+
+  Future<Map<String, dynamic>> currentWeatherOf(String lat, String long) async {
+    var response = await dio
+        .get('api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long');
+    if (response.statusCode == 200) {
+      Map<String, dynamic> jsonForecasts = response.data;
+      return jsonForecasts;
+    } else {
+      return {};
+    }
   }
 }

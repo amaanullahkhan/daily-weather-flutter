@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/modules/forecast/forecast_view/forecast_view.dart';
 import 'package:weather_app/modules/forecasts/forecasts_view/forecasts_view_model.dart';
+import 'package:weather_app/modules/forecasts_map/forecasts_map_view.dart';
 import 'package:weather_app/modules/locations/location_view/location_view.dart';
 import 'package:weather_app/modules/locations/location_view_model/location_view_model.dart';
 
@@ -47,9 +48,13 @@ class _ForecastsViewState extends State<ForecastsView> {
       return ForecastView(viewModel: forecast);
     }).toList();
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.lightBlue[300], actions: [
-        IconButton(icon: Icon(Icons.add), onPressed: goToAddLocation)
-      ]),
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlue[300],
+        actions: [
+          IconButton(icon: Icon(Icons.map), onPressed: goToMap),
+          IconButton(icon: Icon(Icons.add), onPressed: goToAddLocation)
+        ],
+      ),
       backgroundColor: Colors.lightBlue[300],
       body: Column(
         children: <Widget>[
@@ -105,8 +110,18 @@ class _ForecastsViewState extends State<ForecastsView> {
                 forecastsViewFactory.makeLocationView(viewModel),
             fullscreenDialog: true));
   }
+
+  void goToMap() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                forecastsViewFactory.makeForecastsMap(),
+            fullscreenDialog: true));
+  }
 }
 
 abstract class ForecastsViewFactory {
   LocationView makeLocationView(LocationViewModelProtocol delegate);
+  ForecastsMap makeForecastsMap();
 }
