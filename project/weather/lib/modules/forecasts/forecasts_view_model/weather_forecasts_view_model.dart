@@ -45,7 +45,7 @@ class WeatherForecastsViewModel implements ForecastsViewModel {
       var infoViewModel = WeatherInfoViewModel(
           title: "${city.name}, ${city.country}",
           subTitle: weather.weatherMain,
-          heading: "${weather.temperature.celsius.toInt()}");
+          heading: "${weather.temperature.celsius.toInt()}˚");
       var currentTemp = WeatherTextualRowImp(
           day: day,
           maxTemp: "${weather.tempMax.celsius.toInt()}",

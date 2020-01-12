@@ -1,7 +1,7 @@
 import 'package:weather_app/main.dart';
 import 'package:weather_app/modules/forecasts/forecasts_service/forecasts_service.dart';
 import 'package:weather_app/modules/forecasts/forecasts_view/forecasts_view.dart';
-import 'package:weather_app/modules/forecasts/forecasts_view_model/weather_forecast_view_model.dart';
+import 'package:weather_app/modules/forecasts/forecasts_view_model/weather_forecasts_view_model.dart';
 import 'package:weather_app/modules/locations/location_data_provider.dart';
 import 'package:weather_app/modules/locations/location_repository.dart';
 import 'package:weather_app/modules/locations/location_view/location_view.dart';
