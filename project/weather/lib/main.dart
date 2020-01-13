@@ -16,7 +16,10 @@ class WeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: weatherAppFactory.makeForecastsView());
+    return MaterialApp(
+      home: weatherAppFactory.makeForecastsView(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
 

@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:weather/weather.dart';
 import 'package:weather_app/modules/forecasts/forecasts_service/forecasts_service.dart';
-import 'package:weather_app/modules/locations/location_data_provider.dart';
 
 class ForecastsMap extends StatefulWidget {
   @override
@@ -44,7 +42,8 @@ class ForecastsMapState extends State<ForecastsMap> {
 
             // var data = await _service.currentWeatherOf(
             //     latLong.latitude.toString(), latLong.longitude.toString());
-
+            // print(data['main']);
+            
             // setState(() {
             //   _markers = [
             //     Marker(

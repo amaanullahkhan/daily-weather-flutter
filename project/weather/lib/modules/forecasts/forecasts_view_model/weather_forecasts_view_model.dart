@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:weather/weather.dart';
 import 'package:weather_app/models/city.dart';
 import 'package:weather_app/modules/forecast/forecast_view/forecast_view_model.dart';
 import 'package:weather_app/modules/forecast/forecast_view_model/weather_forecast_view_model.dart';
@@ -41,34 +42,33 @@ class WeatherForecastsViewModel implements ForecastsViewModel {
       var weatherList = weathers[index];
       var city = cities[index];
       var weather = weatherList.first;
-      var day = DateFormat('EEEE').format(weather.date);
-      var infoViewModel = WeatherInfoViewModel(
-          title: "${city.name}, ${city.country}",
-          subTitle: weather.weatherMain,
-          heading: "${weather.temperature.celsius.toInt()}˚");
-      var currentTemp = WeatherTextualRowImp(
-          day: day,
-          maxTemp: "${weather.tempMax.celsius.toInt()}",
-          minTemp: "${weather.tempMin.celsius.toInt()}",
-          text: "TODAY");
+
+      var infoViewModel = WeatherInfoViewModel.fromWeather(weather, city);
+
+      var currentTemp = WeatherTextualRowImp.fromWeather(weather, "TODAY");
+
+      var todaysForecastList = weatherList.where((weather) {
+        var today = DateTime.now();
+        return today.day == weather.date.day &&
+            today.month == weather.date.month &&
+            today.year == weather.date.year;
+      }).toList();
+
       var dailyForecastViewModel = DailyForecastViewModelImp(
-          columns: weatherList.map((weather) {
-        return WeatherColumnImp(
-            bottomText: "${weather.tempMin.celsius.toInt()}",
-            topText: "${weather.tempMax.celsius.toInt()}",
-            icon:
-                "http://openweathermap.org/img/wn/${weather.weatherIcon}.png");
+          columns: todaysForecastList.map((weather) {
+        return WeatherColumnImp.fromWeather(weather);
       }).toList());
+
+      Map<int, Weather> weeklyForecastsList = {};
+      for (var weather in weatherList) {
+        weeklyForecastsList[weather.date.day] = weather;
+      }
+
       var weeklyForecastViewModel = WeeklyForecastViewModelImp(
-          rows: weatherList.map((weather) {
-        var day = DateFormat('EEEE').format(weather.date);
-        return WeatherRowImp(
-            day: day,
-            maxTemp: "${weather.tempMax.celsius.toInt()}",
-            minTemp: "${weather.tempMin.celsius.toInt()}",
-            icon:
-                "http://openweathermap.org/img/wn/${weather.weatherIcon}.png");
+          rows: weeklyForecastsList.values.toList().map((weather) {
+        return WeatherRowImp.fromWeather(weather);
       }).toList());
+
       forecasts.add(WeatherForecastViewModel(
           infoViewModel: infoViewModel,
           currentTemp: currentTemp,

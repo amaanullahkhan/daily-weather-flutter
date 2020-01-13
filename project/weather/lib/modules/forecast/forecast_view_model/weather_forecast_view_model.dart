@@ -1,8 +1,11 @@
+import 'package:intl/intl.dart';
+import 'package:weather/weather.dart';
 import 'package:weather_app/controls/daily_forecast_view.dart';
 import 'package:weather_app/controls/weather_column_view.dart';
 import 'package:weather_app/controls/weather_row_view.dart';
 import 'package:weather_app/controls/weather_textual_row.dart';
 import 'package:weather_app/controls/weekly_forecast_view.dart';
+import 'package:weather_app/models/city.dart';
 import 'package:weather_app/modules/forecast/forecast_view/forecast_view_model.dart';
 
 class WeatherForecastViewModel implements ForecastViewModel {
@@ -34,6 +37,13 @@ class WeatherInfoViewModel implements InfoViewModel {
   String heading;
 
   WeatherInfoViewModel({this.title, this.subTitle, this.heading});
+
+  factory WeatherInfoViewModel.fromWeather(Weather weather, City city) {
+    return WeatherInfoViewModel(
+        title: "${city.name}, ${city.country}",
+        subTitle: weather.weatherMain,
+        heading: "${weather.temperature.celsius.toInt()}˚");
+  }
 }
 
 class WeatherTextualRowImp implements WeatherTextualRow {
@@ -43,6 +53,14 @@ class WeatherTextualRowImp implements WeatherTextualRow {
   String minTemp;
 
   WeatherTextualRowImp({this.day, this.text, this.maxTemp, this.minTemp});
+
+  factory WeatherTextualRowImp.fromWeather(Weather weather, String text) {
+    return WeatherTextualRowImp(
+        day: DateFormat('EEEE').format(weather.date),
+        maxTemp: "${weather.temperature.celsius.toInt()}",
+        minTemp: "${weather.tempMin.celsius.toInt()}",
+        text: text);
+  }
 }
 
 class DailyForecastViewModelImp implements DailyForecastViewModel {
@@ -65,6 +83,14 @@ class WeatherColumnImp implements WeatherColumn {
   String icon;
 
   WeatherColumnImp({this.topText, this.bottomText, this.icon});
+
+  factory WeatherColumnImp.fromWeather(Weather weather) {
+    var time = DateFormat('ha').format(weather.date);
+    return WeatherColumnImp(
+        bottomText: "${weather.temperature.celsius.toInt()}",
+        topText: time,
+        icon: "http://openweathermap.org/img/wn/${weather.weatherIcon}.png");
+  }
 }
 
 class WeatherRowImp implements WeatherRow {
@@ -73,4 +99,12 @@ class WeatherRowImp implements WeatherRow {
   String maxTemp;
   String minTemp;
   WeatherRowImp({this.day, this.icon, this.maxTemp, this.minTemp});
+
+  factory WeatherRowImp.fromWeather(Weather weather) {
+    return WeatherRowImp(
+        day: DateFormat('EEEE').format(weather.date),
+        maxTemp: "${weather.tempMax.celsius.toInt()}",
+        minTemp: "${weather.tempMin.celsius.toInt()}",
+        icon: "http://openweathermap.org/img/wn/${weather.weatherIcon}.png");
+  }
 }
