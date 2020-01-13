@@ -29,7 +29,7 @@ class ForecastsService {
 
   Future<Map<String, dynamic>> currentWeatherOf(String lat, String long) async {
     var response = await dio
-        .get('api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long');
+        .get('https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=ae0027368366977769d812a219b6e19e');
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonForecasts = response.data;
       return jsonForecasts;

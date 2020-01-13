@@ -14,5 +14,7 @@ class LocationsDataProvider {
 // only global functions can be passed to compute(#,#), thats why declaring this on global level.
 List<City> _parseCities(String string) {
   final parsed = json.decode(string).cast<Map<String, dynamic>>();
-  return parsed.map<City>((json) => City.fromJson(json)).toList();
+  List<City> cities = parsed.map<City>((json) => City.fromJson(json)).toList();
+  cities = cities;
+  return cities;
 }

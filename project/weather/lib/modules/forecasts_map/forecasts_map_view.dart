@@ -23,7 +23,7 @@ class ForecastsMapState extends State<ForecastsMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(title: Text('Weather Map'), backgroundColor: Colors.lightBlue[300],),
         body: GoogleMap(
           markers: Set<Marker>.of(_markers),
           mapType: MapType.hybrid,
@@ -34,6 +34,8 @@ class ForecastsMapState extends State<ForecastsMap> {
                 markerId: MarkerId("id"),
                 position: latLong,
                 infoWindow: InfoWindow(title: "Loading")));
+
+            setWeatherDetailsFor(latLong);
           },
         ));
   }
@@ -47,6 +49,7 @@ class ForecastsMapState extends State<ForecastsMap> {
   void setWeatherDetailsFor(LatLng latLng) async {
     var data = await _service.currentWeatherOf(
         latLng.latitude.toString(), latLng.longitude.toString());
+        print(data);
     setState(() {
       _markers = [
         Marker(
@@ -56,7 +59,7 @@ class ForecastsMapState extends State<ForecastsMap> {
                 title: Temperature(data['main']['temp'])
                     .celsius
                     .toInt()
-                    .toString()))
+                    .toString()+"˚C"))
       ];
     });
   }
