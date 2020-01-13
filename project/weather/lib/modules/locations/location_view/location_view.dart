@@ -47,7 +47,8 @@ class _LocationViewState extends State<LocationView> {
   Widget build(BuildContext context) {
     var cities = viewModel.getCities();
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.lightBlue[300], title: Text(viewModel.title)),
+      appBar: AppBar(
+          backgroundColor: Colors.lightBlue[300], title: Text(viewModel.title)),
       body: Container(
         padding: EdgeInsets.all(8),
         child: ListView.builder(

@@ -23,6 +23,43 @@ class WeatherForecastViewModel implements ForecastViewModel {
       this.weeklyForecastViewModel,
       this.onRemoveTapped});
 
+  factory WeatherForecastViewModel.fromWeather(
+      List<Weather> weatherList, City city) {
+    var weather = weatherList.first;
+
+    var infoViewModel = WeatherInfoViewModel.fromWeather(weather, city);
+
+    var currentTemp = WeatherTextualRowImp.fromWeather(weather, "TODAY");
+
+    var todaysForecastList = weatherList.where((weather) {
+      var today = DateTime.now();
+      return today.day == weather.date.day &&
+          today.month == weather.date.month &&
+          today.year == weather.date.year;
+    }).toList();
+
+    var dailyForecastViewModel = DailyForecastViewModelImp(
+        columns: todaysForecastList.map((weather) {
+      return WeatherColumnImp.fromWeather(weather);
+    }).toList());
+
+    Map<int, Weather> weeklyForecastsList = {};
+    for (var weather in weatherList) {
+      weeklyForecastsList[weather.date.day] = weather;
+    }
+
+    var weeklyForecastViewModel = WeeklyForecastViewModelImp(
+        rows: weeklyForecastsList.values.toList().map((weather) {
+      return WeatherRowImp.fromWeather(weather);
+    }).toList());
+
+    return WeatherForecastViewModel(
+        infoViewModel: infoViewModel,
+        currentTemp: currentTemp,
+        dailyForecastViewModel: dailyForecastViewModel,
+        weeklyForecastViewModel: weeklyForecastViewModel);
+  }
+
   @override
   void removeTapped() {
     if (onRemoveTapped != null) {

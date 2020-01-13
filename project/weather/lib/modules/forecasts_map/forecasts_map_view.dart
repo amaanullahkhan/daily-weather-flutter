@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:weather/weather.dart';
 import 'package:weather_app/modules/forecasts/forecasts_service/forecasts_service.dart';
 
 class ForecastsMap extends StatefulWidget {
@@ -27,36 +28,36 @@ class ForecastsMapState extends State<ForecastsMap> {
           markers: Set<Marker>.of(_markers),
           mapType: MapType.hybrid,
           initialCameraPosition: _kGooglePlex,
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
-          onTap: (latLong) async {
-            setState(() {
-              _markers = [
-                Marker(
-                    markerId: MarkerId("id"),
-                    position: latLong,
-                    infoWindow: InfoWindow(title: "Loading"))
-              ];
-            });
-
-            // var data = await _service.currentWeatherOf(
-            //     latLong.latitude.toString(), latLong.longitude.toString());
-            // print(data['main']);
-            
-            // setState(() {
-            //   _markers = [
-            //     Marker(
-            //         markerId: MarkerId("id"),
-            //         position: latLong,
-            //         infoWindow: InfoWindow(
-            //             title: Temperature(data['main']['temp'])
-            //                 .celsius
-            //                 .toInt()
-            //                 .toString()))
-            //   ];
-            // });
+          onMapCreated: _controller.complete,
+          onTap: (latLong) {
+            _setMarker(Marker(
+                markerId: MarkerId("id"),
+                position: latLong,
+                infoWindow: InfoWindow(title: "Loading")));
           },
         ));
+  }
+
+  void _setMarker(Marker marker) {
+    setState(() {
+      _markers = [marker];
+    });
+  }
+
+  void setWeatherDetailsFor(LatLng latLng) async {
+    var data = await _service.currentWeatherOf(
+        latLng.latitude.toString(), latLng.longitude.toString());
+    setState(() {
+      _markers = [
+        Marker(
+            markerId: MarkerId("id"),
+            position: latLng,
+            infoWindow: InfoWindow(
+                title: Temperature(data['main']['temp'])
+                    .celsius
+                    .toInt()
+                    .toString()))
+      ];
+    });
   }
 }
